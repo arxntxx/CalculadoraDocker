@@ -22,4 +22,7 @@ jobs:
         docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }}
     
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag arantxa03/calculadoradocker:latest
+      run: docker build -t arantxa03/calculadoradocker:latest .
+
+    - name: Subiendo a Docker
+      run: docker push arantxa03/calculadoradocker:latest
