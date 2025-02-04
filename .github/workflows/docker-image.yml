@@ -7,11 +7,27 @@ on:
     branches: [ "master" ]
 
 jobs:
+  tests: 
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Hacer checkout    
+      uses: actions/checkout@v4
+      
+    - name: Instalar PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+
+    - name: Instalar dependencias
+      run: composer install 
+
+    - name: Ejecutar los tests
+      run: vendor/bin/phpunit --testdox tests
   
   build:
+    needs: tests
 # IMAGEN
     runs-on: ubuntu-latest
-
     steps:
     # Acción que vine con github, descarga todo lo que hay en el repo y lo mete en la imagen.
     - name: Hacer checkout
