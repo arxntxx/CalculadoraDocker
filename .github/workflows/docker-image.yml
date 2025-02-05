@@ -3,8 +3,8 @@ name: Docker Image CI
 on:
   push:
     branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    tags:        
+      - '*'
 
 jobs:
   tests: 
@@ -33,6 +33,9 @@ jobs:
     - name: Hacer checkout
       uses: actions/checkout@v4
 
+    - uses: little-core-labs/get-git-tag@v3.0.1
+      id: tagName
+
     # Login con el Docker Login del Marketplace
     - name: Login to Docker Hub
       uses: docker/login-action@v3
@@ -51,4 +54,4 @@ jobs:
       with:
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: ${{ secrets.DOCKER_USER }}/calculadoradocker:latest
+        tags: ${{ secrets.DOCKER_USER }}/calculadoradocker:$GIT_TAG_NAME
