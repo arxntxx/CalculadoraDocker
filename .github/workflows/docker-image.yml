@@ -32,9 +32,12 @@ jobs:
     # Acción que vine con github, descarga todo lo que hay en el repo y lo mete en la imagen.
     - name: Hacer checkout
       uses: actions/checkout@v4
-
-    - uses: little-core-labs/get-git-tag@v3.0.1
+    
+    - name: Acceder al tag
+      uses: olegtarasov/get-tag@v2.1.4
       id: tagName
+      with:
+        tagname: ${{ steps.tagName.outputs.tag }}
 
     # Login con el Docker Login del Marketplace
     - name: Login to Docker Hub
