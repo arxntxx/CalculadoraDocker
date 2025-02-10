@@ -57,4 +57,4 @@ jobs:
       with:
         platforms: linux/amd64,linux/arm64
         push: true
-        tags: ${{ secrets.DOCKER_USER }}/calculadoradocker:$GIT_TAG_NAME
+        tags: ${{ secrets.DOCKER_USER }}/calculadoradocker:${{ steps.tag.outputs.tag }}
